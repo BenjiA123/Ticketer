@@ -5,8 +5,8 @@ const checkoutButton = document.getElementById("checkoutButton");
 if(checkoutButton){
 checkoutButton.addEventListener("click", function (e) {
     const {ticketId} = e.target.dataset
-    // Remove the url during production
-  fetch(`http://localhost:1200/api/v1/booking/checkout-session/${ticketId}`, {
+    // Remove the url during production  http://localhost:1200
+  fetch(`/api/v1/booking/checkout-session/${ticketId}`, {
     method: "GET",
   })
     .then(function (response) {
