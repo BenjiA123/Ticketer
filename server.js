@@ -1,0 +1,27 @@
+const dotenv = require('dotenv')
+const mongoose = require('mongoose')
+
+dotenv.config({path:'./config.env'})
+
+const app  = require('./app')
+
+console.log(process.env.PORT)
+
+// "mongodb://localhost:27017/natours"
+
+mongoose
+.connect(process.env.DATABASE_LOCAL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('Connected to database ');
+})
+.catch((err) => {
+  console.log(err);
+});
+
+const port = process.env.PORT
+const server = app.listen(port,()=>{
+    console.log("App Listening")
+})

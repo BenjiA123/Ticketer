@@ -1,0 +1,70 @@
+extends base
+
+block content 
+    section.section-header
+        .header__hero
+            .header__hero-overlay &nbsp;
+            img.header__hero-img(src=`/img/tours/tour-4-2.jpg`, alt='Tour 5')
+
+        .heading-box
+            h1.heading-primary
+                span= ticket.ticketname
+            .heading-box__group
+                .heading-box__detail
+                    svg.heading-box__icon
+                        use(xlink:href='/img/icons.svg#icon-clock')
+                    - const date = ticket.date.toLocaleString('en-us',{day:'numeric',month:'long',year:'numeric'})
+                    span.heading-box__text= date
+                .heading-box__detail
+                        svg.heading-box__icon
+                            use(xlink:href='/img/icons.svg#icon-map-pin')
+                        span.heading-box__text= ticket.venue
+
+    section.section-description
+        .overview-box
+            div
+            .overview-box__group
+                h2.heading-secondary.ma-bt-lg Quick facts
+                    .overview-box__detail
+                        svg.overview-box__icon
+                            use(xlink:href='/img/icons.svg#icon-calendar')
+                        span.overview-box__label Date
+                        span.overview-box__text= ticket.date.toLocaleString('en-us',{day:'numeric',month:'long',year:'numeric'})
+                    .overview-box__detail
+                        svg.overview-box__icon
+                            use(xlink:href='/img/icons.svg#icon-trending-up')
+                        span.overview-box__label Artist
+                        span.overview-box__text= ticket.artist
+                    .overview-box__detail
+                        svg.overview-box__icon
+                            use(xlink:href='/img/icons.svg#icon-user')
+                        span.overview-box__label College
+                        span.overview-box__text= ticket.college 
+                    .overview-box__detail
+                        svg.overview-box__icon
+                            use(xlink:href='/img/icons.svg#icon-star')
+                        span.overview-box__label Venue
+                        span.overview-box__text= ticket.venue
+
+        .description-box
+            h2.heading-secondary.ma-bt-lg= ` About the ${ticket.ticketname}`
+            -const paragraphs = ticket.description.split('\n')
+            each p in paragraphs
+                p.description__text= p
+
+
+
+
+    section.section-cta
+        .cta
+            .cta__img.cta__img--logo
+                img(src='/img/logo-white.png', alt='Natours logo')
+            img.cta__img.cta__img--1(src='/img/tours/tour-5-2.jpg', alt='')
+            img.cta__img.cta__img--2(src='/img/tours/tour-5-1.jpg', alt='')
+            .cta__content
+                h2.heading-secondary What are you waiting for?
+                p.cta__text Everybody who is anybody will be there. Make it yours today!
+                a.btn.btn--green.span-all-rows#checkoutButton(data-ticket-id=`${ticket.id}`) Book a Ticket now!
+
+
+
