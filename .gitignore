@@ -1,3 +1,4 @@
 # This means the node_module folder and all .env files
 node_modules/
+.cache/
 *.env
