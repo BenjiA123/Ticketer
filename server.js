@@ -9,8 +9,13 @@ console.log(process.env.PORT)
 
 // "mongodb://localhost:27017/natours"
 
+const DB = process.env.DATABASE.replace(
+  "<PASSWORD>",
+  process.env.DATABASE_PASSWORD
+);
+
 mongoose
-.connect(process.env.DATABASE_LOCAL, {
+.connect(process.env.DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
