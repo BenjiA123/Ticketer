@@ -15,7 +15,9 @@ exports.getCheckoutSession = catchAsync(async(req,res,next)=>{
     const session = await stripe.checkout.sessions.create({
         // The first 3 are compulsory
         payment_method_types:['card'],
-        success_url:`${req.protocol}://${req.get("host")}/?ticket=${req.params.ticketID}&price=${ticket.price}`,
+        // Temporary solution
+        // success_url:`${req.protocol}://${req.get("host")}/?ticket=${req.params.ticketID}&price=${ticket.price}`,
+        success_url:`${req.protocol}://${req.get("host")}/`,
         cancel_url:`${req.protocol}://${req.get("host")}/ticket/${ticket.slug}`,
         customer_email:ticket.email,
         client_reference_id:req.params.ticketID,
@@ -48,16 +50,46 @@ exports.getCheckoutSession = catchAsync(async(req,res,next)=>{
 
 })
 
-exports.createBookingCheckout = catchAsync(async(req,res,next)=>{
+// Temporary solution
+// exports.createBookingCheckout = catchAsync(async(req,res,next)=>{
 
 
-    const {ticket,price} = req.query
-    if(!ticket || !price) return next()
+//     const {ticket,price} = req.query
+//     if(!ticket || !price) return next()
 
-    await Booking.create({ticket,price})
+//     await Booking.create({ticket,price})
 
-    res.redirect(req.originalUrl.split('?')[0])
-})
+//     res.redirect(req.originalUrl.split('?')[0])
+// })
+
+const createBookingCheckout = async session =>{
+  const ticket = session.client_reference_id
+  const price= session.line_items[0].price_data.unit_amount/100
+  await Booking.create({ticket,price})
+}
+
+exports.webhookCheckout = (req,res,next)=>{
+  const signature = req.headers['stripe-signature']
+
+  let event
+  try {
+    event = stripe.webhooks.constructEvent(
+      req.body,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET)
+  } catch (error) {
+     return res.status(400).send(`Webhook error: ${error.message}`)
+  }
+
+    if(event.type ==='checkout.session.completed'){
+      createBookingCheckout(event.data.object);
+
+    }
+
+    res.status(200).json({recieved:true})
+
+
+}
 
 
 exports.getAllBookings = factory.getAll(Booking)
