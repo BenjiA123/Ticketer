@@ -30,3 +30,12 @@ const port = process.env.PORT
 const server = app.listen(port,()=>{
     console.log("App Listening")
 })
+
+
+// This is neccessary to prevent our program from shutting down abrubptly when it recieves this signal, It handles all the current requests before it shuts down
+process.on('SIGTERM',()=>{
+  console.log("😊😊😊😊😊😊RECIEVED SIGTERM SIGNAL")
+  server.close(()=>{
+    console.log("😁😁 Process Terminated")
+  })
+})
