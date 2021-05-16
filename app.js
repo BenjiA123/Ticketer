@@ -1,3 +1,4 @@
+const cors = require('cors');
 const express = require('express')
 const compression = require("compression")
 const path = require('path');
@@ -15,14 +16,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const viewRouter = require('./Routes/viewRoutes');
 
-const cors = require('cors');
 
 app.use(express.json({ limit: '10kb' }));
 app.use(cors());
+
+// Permits complex requests
 app.options('*', cors());
-app.use(cors({
-  origin:''
-}))
+
+// Use this to permit certain particular origins
+// app.use(cors({
+//   origin:''
+// }))
 
 
 const ticketRouter = require('./Routes/ticketRoute')
