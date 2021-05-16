@@ -53,10 +53,10 @@ app.use(xss())
 
 
 
-app.use(cors());
+// app.use(cors());
 
 // Permits complex requests
-app.options('*', cors());
+// app.options('*', cors());
 
 // Use this to permit certain particular origins
 // app.use(cors({
