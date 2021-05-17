@@ -29,7 +29,7 @@ exports.getCheckoutSession = catchAsync(async(req,res,next)=>{
                 currency: 'usd',
                 product_data: {
                     name:`${ticket.ticketname}'s Ticket`,
-                    images: ['https://www.natours.dev/img/tours/tour-1-cover.jpg'],
+                    images: [`${req.protocol}://${req.get("host")}/img/tours/${ticket.image}`],
                 },
                 unit_amount: ticket.price * 1000,
               },

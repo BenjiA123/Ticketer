@@ -18,7 +18,11 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 // Set security HTTP
-app.use(helmet())
+app.use(helmet(
+  {
+    contentSecurityPolicy: false,
+  }
+))
 // A rate limiter prevents a user from making too many requests at a given time
 // It prevents Brute force attacks
 // I counts number of requests and blocks them
@@ -53,7 +57,7 @@ app.use(xss())
 
 
 
-// app.use(cors());
+app.use(cors());
 
 // Permits complex requests
 // app.options('*', cors());
@@ -69,13 +73,6 @@ app.use(compression())
 app.use(express.static(path.join(__dirname, 'public')));
 
 const viewRouter = require('./Routes/viewRoutes');
-
-
-
-
-
-
-
 const ticketRouter = require('./Routes/ticketRoute')
 const bookingRouter = require('./Routes/bookingRoute')
 

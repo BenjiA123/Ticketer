@@ -690,6 +690,10 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
 }
+@media only screen and (max-width: 480px) {
+  .card {
+  }
+}
 .card__header {
   position: relative;
 }
