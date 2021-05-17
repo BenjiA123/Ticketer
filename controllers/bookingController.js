@@ -31,7 +31,7 @@ exports.getCheckoutSession = catchAsync(async(req,res,next)=>{
                     name:`${ticket.ticketname}'s Ticket`,
                     images: [`${req.protocol}://${req.get("host")}/img/tours/${ticket.image}`],
                 },
-                unit_amount: ticket.price,
+                unit_amount: ticket.price/10,
               },
               quantity: 1,
             },
