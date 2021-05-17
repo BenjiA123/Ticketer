@@ -4,6 +4,7 @@ const checkoutButton = document.getElementById("checkoutButton");
 
 if(checkoutButton){
 checkoutButton.addEventListener("click", function (e) {
+  e.target.textContent = 'Processing...';
     const {ticketId} = e.target.dataset
     // Remove the url during production  http://localhost:1200
   fetch(`/api/v1/booking/checkout-session/${ticketId}`, {
