@@ -13,7 +13,7 @@ checkoutButton.addEventListener("click", function (e) {
       return response.json();
     })
     .then(function (session) {
-        console.log(session)
+        // console.log(session)
       return stripe.redirectToCheckout({ sessionId: session.session.id });
     })
     .then(function (result) {
