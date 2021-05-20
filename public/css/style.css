@@ -102,6 +102,7 @@ body {
   font-size: 2.25rem;
   text-transform: uppercase;
   font-weight: 700;
+  text-align: center;
   background-image: -webkit-gradient(
     linear,
     left top,
@@ -443,6 +444,7 @@ body {
 }
 
 .overview-box {
+  margin-top: 2.7rem;
   background-color: #f7f7f7;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -451,6 +453,12 @@ body {
   -ms-flex-pack: center;
   justify-content: center;
 }
+
+.overview-box__group {
+  margin-bottom: -5rem;
+  width: 26rem;
+}
+
 .overview-box__group:not(:last-child) {
   margin-bottom: 7rem;
 }
@@ -467,6 +475,11 @@ body {
 .overview-box__detail svg {
   margin-right: 1.25rem;
 }
+
+.overview-box__detail:first-child {
+  margin-top: 3.25rem;
+}
+
 .overview-box__detail:not(:last-child) {
   margin-bottom: 2.25rem;
 }
@@ -504,11 +517,12 @@ body {
   margin: 0 auto;
   overflow: hidden;
   background-color: #fff;
-  padding: 9rem 5rem 9rem 21rem;
+  padding: 7rem 5rem 7rem 21rem;
   border-radius: 2rem;
   -webkit-box-shadow: 0 3rem 8rem 0.5rem rgba(0, 0, 0, 0.15);
   box-shadow: 0 3rem 8rem 0.5rem rgba(0, 0, 0, 0.15);
 }
+
 .cta__img {
   height: 15rem;
   width: 15rem;
@@ -518,6 +532,18 @@ body {
   border-radius: 50%;
   -webkit-box-shadow: 1rem 0.5rem 3rem rgba(0, 0, 0, 0.15);
   box-shadow: 1rem 0.5rem 3rem rgba(0, 0, 0, 0.15);
+}
+@media screen and (max-width: 40rem) {
+  .cta-btn {
+    /* visibility: hidden; */
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    padding: 1.7rem;
+  }
+  .cta__img {
+    top: 75%;
+  }
 }
 .cta__img--logo {
   padding: 2rem;
@@ -715,10 +741,8 @@ body {
     justify-content: center;
     align-content: center;
     display: flex;
-    margin-bottom: 16px;
-    width: 96vw;
-    margin-left: 2vw;
-    margin-right: vw;
+    width: 90vw;
+    margin: 25px 20px 25px 20px;
   }
 
   .nav__el,
@@ -739,13 +763,6 @@ body {
     background-color: #fcfcfc;
   }
 
-  .overview-box {
-    margin-top: 35px;
-    display: block;
-    position: relative;
-    width: 100vw;
-  }
-
   .description-box {
     display: block;
   }
@@ -755,12 +772,25 @@ body {
   }
 
   .cta {
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 2rem;
+    box-shadow: 0 3rem 8rem 0.5rem rgba(0, 0, 0, 0.15);
+
     margin: 0;
-    padding: 0;
-    max-width: 90vw;
-    height: 450px;
+    padding: 2rem 1rem 0 1rem;
+    max-width: 99%;
+    height: 20rem;
     display: inline-block;
     text-align: center;
+  }
+
+  @media only screen and (max-width: 50rem) {
+    .cta {
+      height: 40rem;
+      /* padding-top: 90rem; */
+    }
   }
 
   .cta .cta__content {
